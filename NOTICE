@@ -1,0 +1,17 @@
+Llamacore
+Copyright (c) 2026 Lucas Vann (陆凯文)
+Licensed under the MIT License.
+
+This product bundles or depends on the following third-party software,
+each under their own license:
+
+  - llama.cpp        (MIT)         https://github.com/ggerganov/llama.cpp
+  - Electron         (MIT)         https://www.electronjs.org/
+  - React            (MIT)         https://react.dev/
+  - Vite             (MIT)         https://vitejs.dev/
+  - Tailwind CSS     (MIT)         https://tailwindcss.com/
+  - Zustand          (MIT)         https://github.com/pmndrs/zustand
+  - i18next          (MIT)         https://www.i18next.com/
+  - react-markdown   (MIT)         https://github.com/remarkjs/react-markdown
+  - KaTeX            (MIT)         https://katex.org/
+  - Recharts         (MIT)         https://recharts.org/

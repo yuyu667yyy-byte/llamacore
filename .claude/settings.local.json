@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(jobs)",
+      "Bash(Get-Content *)",
+      "Bash(kill %1)",
+      "PowerShell(npm install *)",
+      "PowerShell(New-Item *)",
+      "Bash(node *)",
+      "WebFetch(domain:github.com)",
+      "Bash(npx tsc *)",
+      "Bash(Select-Object -First 30)",
+      "Bash(npm uninstall *)",
+      "Bash(Get-ChildItem *)",
+      "Bash(echo \"EXIT=$?\")",
+      "Bash(ls build *)",
+      "Bash(git rev-parse *)",
+      "Bash(gh --version)",
+      "Bash(gh auth *)",
+      "Bash(git --version)",
+      "Bash(git init *)",
+      "Bash(git add *)"
+    ]
+  }
+}

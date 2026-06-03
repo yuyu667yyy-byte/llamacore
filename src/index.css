@@ -1,0 +1,164 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Default (light) palette */
+:root {
+  --c-900: #f5f5f5;
+  --c-800: #ebebeb;
+  --c-700: #e0e0e0;
+  --c-600: #d0d0d0;
+  --c-500: #b8b8b8;
+  --c-400: #888888;
+  --c-300: #555555;
+  --c-200: #333333;
+  --c-100: #111111;
+  --scrollbar-track: #e0e0e0;
+  --scrollbar-thumb: #b8b8b8;
+  --scrollbar-thumb-hover: #888888;
+  color-scheme: light;
+}
+
+/* Dark palette overrides */
+html.dark {
+  --c-900: #0d0d0d;
+  --c-800: #161616;
+  --c-700: #1e1e1e;
+  --c-600: #2a2a2a;
+  --c-500: #3a3a3a;
+  --c-400: #555555;
+  --c-300: #888888;
+  --c-200: #aaaaaa;
+  --c-100: #dddddd;
+  --scrollbar-track: #1e1e1e;
+  --scrollbar-thumb: #3a3a3a;
+  --scrollbar-thumb-hover: #555555;
+  color-scheme: dark;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  }
+
+  body {
+    @apply bg-dark-900 text-dark-100 font-sans;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb-hover);
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-accent hover:bg-accent-hover text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors duration-150 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-ghost {
+    @apply text-dark-200 hover:text-dark-100 hover:bg-dark-600 text-sm px-3 py-1.5 rounded-lg transition-colors duration-150;
+  }
+
+  .btn-danger {
+    @apply text-red-500 hover:text-white hover:bg-red-500/20 text-sm px-3 py-1.5 rounded-lg transition-colors duration-150;
+  }
+
+  .input-field {
+    @apply bg-dark-700 border border-dark-500 rounded-lg px-3 py-2 text-sm text-dark-100 placeholder-dark-400 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/50 transition-colors duration-150 w-full;
+  }
+
+  .card {
+    @apply bg-dark-800 border border-dark-600 rounded-xl p-4;
+  }
+}
+
+/* Markdown code blocks */
+.prose pre {
+  @apply bg-dark-700 rounded-lg overflow-x-auto;
+  padding: 1rem;
+  margin: 0.5rem 0;
+}
+
+.prose code:not(pre code) {
+  @apply bg-dark-600 text-accent-light px-1 py-0.5 rounded text-[0.85em];
+}
+
+.prose p {
+  margin: 0.5em 0;
+}
+
+.prose ul, .prose ol {
+  padding-left: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+.prose table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0.75rem 0;
+}
+
+.prose th, .prose td {
+  @apply border border-dark-500 px-3 py-1.5 text-sm;
+}
+
+.prose th {
+  @apply bg-dark-700;
+}
+
+/* Thinking / reasoning block */
+.thinking-block {
+  @apply border-l-2 border-accent/50 pl-3 my-2 text-dark-300 text-sm italic;
+}
+
+/* Streaming cursor animation */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.cursor-blink::after {
+  content: '▋';
+  @apply text-accent;
+  animation: blink 0.8s step-start infinite;
+}
+
+/* ── KaTeX math ──────────────────────────────────────────────────────────── */
+.katex { font-size: 1.05em; }
+.katex-display {
+  margin: 0.6em 0;
+  padding: 0.25em 0.5em;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.katex-display > .katex { white-space: nowrap; }
+
+/* In dark mode, lighten the formula color to ensure contrast */
+html.dark .katex { color: var(--c-100); }
+html:not(.dark) .katex { color: var(--c-100); }
+
+/* Wrapper added by MathCopyButtons keeps long display formulas scrollable */
+.math-wrap { max-width: 100%; }
+.math-wrap.block { display: block; }
+.math-wrap > .katex-display { margin: 0; }
+
+.math-copy-btn {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}

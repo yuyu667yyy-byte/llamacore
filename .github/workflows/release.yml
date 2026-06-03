@@ -1,0 +1,56 @@
+name: Build Releases
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-latest
+            platform: mac
+            artifact: release-mac
+          - os: ubuntu-latest
+            platform: linux
+            artifact: release-linux
+          - os: windows-latest
+            platform: win
+            artifact: release-win
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build (${{ matrix.platform }})
+        run: npm run build && npx electron-builder --${{ matrix.platform }} --publish never
+        env:
+          # Avoid attempting to code-sign/notarize on macOS in CI.
+          CSC_IDENTITY_AUTO_DISCOVERY: false
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: |
+            release/*.dmg
+            release/*.AppImage
+            release/*.exe
+            release/*.yml
+            release/*.blockmap
+          if-no-files-found: warn
